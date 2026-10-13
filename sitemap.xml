@@ -3,7 +3,7 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://gorpravburo.ru/</loc>
-    <lastmod>2026-10-08</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -17,6 +17,14 @@
     <image:image>
       <image:loc>https://gorpravburo.ru/stepanov.jpg</image:loc>
       <image:title>Степанов Василий Владимирович — юрист</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://gorpravburo.ru/mkrtchyan.jpg</image:loc>
+      <image:title>Мкртчян Араик Сергеевич — юрист</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://gorpravburo.ru/suhov.jpg</image:loc>
+      <image:title>Сухов Александр Юрьевич — юрист</image:title>
     </image:image>
   </url>
 </urlset>
