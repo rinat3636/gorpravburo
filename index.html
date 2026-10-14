@@ -1076,13 +1076,7 @@ function frame(){
 }
 if(!reduce)requestAnimationFrame(frame);
 
-/* lead form → Telegram-бот.
-   Подключение: впишите TG_BOT_TOKEN и TG_CHAT_ID ниже — больше ничего менять не нужно.
-   Токен: @BotFather → /newbot. Chat id: напишите боту любое сообщение, затем откройте
-   https://api.telegram.org/bot<ТОКЕН>/getUpdates → "chat":{"id": ЧИСЛО} */
-const TG_BOT_TOKEN='';   // токен бота из @BotFather
-const TG_CHAT_ID='';     // id чата, куда слать заявки
-
+/* lead form → Telegram-рассылка подписчикам бота через /bot/lead (сервис на этом сервере) */
 document.getElementById('leadForm').addEventListener('submit',e=>{
   e.preventDefault();
   const f=e.target,btn=f.querySelector('button[type="submit"]');
@@ -1090,9 +1084,8 @@ document.getElementById('leadForm').addEventListener('submit',e=>{
   const fail=()=>{btn.disabled=false;btn.textContent='Получить консультацию';alert('Не удалось отправить — позвоните нам: 8 (925) 464-88-88')};
   btn.disabled=true;btn.textContent='Отправляем…';
   const d=Object.fromEntries(new FormData(f).entries());
-  if(!TG_BOT_TOKEN||!TG_CHAT_ID){setTimeout(done,700);return} // демо, пока бот не подключён
-  const text='Новая заявка с сайта «Городское правовое бюро»\n\nИмя: '+d.name+'\nТелефон: '+d.phone+'\nСитуация: '+d.topic+'\nСообщение: '+(d.message||'—');
-  fetch('https://api.telegram.org/bot'+TG_BOT_TOKEN+'/sendMessage',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:TG_CHAT_ID,text:text})})
+  fetch('/bot/lead',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({name:d.name,phone:d.phone,topic:d.topic,message:d.message||''})})
     .then(r=>r.json()).then(r=>{if(!r.ok)throw 0;done()}).catch(fail);
 });
 document.getElementById('year').textContent=new Date().getFullYear();
